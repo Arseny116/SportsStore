@@ -1,4 +1,4 @@
-﻿namespace SportsStore.Core.Models.Product
+﻿namespace SportsStore.Core.Models.ProductM
 {
     public enum Currency
     {

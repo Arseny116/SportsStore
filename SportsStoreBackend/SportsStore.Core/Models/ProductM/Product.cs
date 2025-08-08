@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
 using System.Runtime.InteropServices;
+using CSharpFunctionalExtensions;
 
-namespace SportsStore.Core.Models.Product
+namespace SportsStore.Core.Models.ProductM
 {
     public class Product
     {
@@ -25,16 +26,18 @@ namespace SportsStore.Core.Models.Product
 
 
 
-        public (Product, string) Create(Guid id, string name, string description, Money price)
+        public Result<Product> Create(Guid id, string name, string description, Money price)
         {
-            string error = string.Empty;
 
-            if (string.IsNullOrEmpty(name) || name.Length <= MAX_LENGTH || !name.Any(x => char.IsDigit(x)))
+            if (string.IsNullOrEmpty(name) || name.Length >= MAX_LENGTH || !name.Any(x => char.IsDigit(x)))
             {
-                error = "Имя строки имело неверный формат:";
+                return Result.Failure<Product>("Ошибка формата названия товара");
             }
 
-            return (new Product(id, name, description, price), error);
+            var product = new Product(id, name, description, price);
+
+
+            return Result.Success(product);
 
         }
 

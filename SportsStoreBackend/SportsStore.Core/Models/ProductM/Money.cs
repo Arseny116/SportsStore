@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SportsStore.Core.Models.Product
+namespace SportsStore.Core.Models.ProductM
 {
     public record Money(decimal Amout , Currency Currency);
 }
